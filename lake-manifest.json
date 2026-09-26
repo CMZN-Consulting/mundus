@@ -1,0 +1,13 @@
+{"version": "1.2.0",
+ "packagesDir": ".lake/packages",
+ "packages":
+ [{"type": "path",
+   "scope": "",
+   "name": "«memory-artifact»",
+   "manifestFile": "lake-manifest.json",
+   "inherited": false,
+   "dir": "../memory-artifact",
+   "configFile": "lakefile.toml"}],
+ "name": "mundus",
+ "lakeDir": ".lake",
+ "fixedToolchain": false}

@@ -1,0 +1,14 @@
+name = "mundus"
+version = "0.1.0"
+defaultTargets = ["mundus"]
+
+[[lean_lib]]
+name = "Mundus"
+
+[[lean_exe]]
+name = "mundus"
+root = "Main"
+
+[[require]]
+name = "memory-artifact"
+path = "../memory-artifact"
