@@ -10,5 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: leanprover/lean-action@v1
+      - name: Checkout mundus
+        uses: actions/checkout@v5
+
+      - name: Checkout memory-artifact
+        uses: actions/checkout@v5
+        with:
+          repository: CMZN-Consulting/memory-artifact
+          path: ../memory-artifact
+
+      - name: Build mundus
+        uses: leanprover/lean-action@v1
