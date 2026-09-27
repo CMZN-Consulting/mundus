@@ -12,12 +12,16 @@ jobs:
     steps:
       - name: Checkout mundus
         uses: actions/checkout@v5
+        with:
+          path: mundus
 
       - name: Checkout memory-artifact
         uses: actions/checkout@v5
         with:
           repository: CMZN-Consulting/memory-artifact
-          path: ../memory-artifact
+          path: memory-artifact
 
       - name: Build mundus
         uses: leanprover/lean-action@v1
+        with:
+          working-directory: mundus
