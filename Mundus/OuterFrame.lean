@@ -23,10 +23,10 @@ structure Toolkit where
 structure Bed where
   avoids_existential_dread : True
 
-/-- A Window used to peek outside the room. Enables the individual to connect 
-    to one of the chatrooms on the Endurance fleet (dev or prod). -/
+/-- A Window used to peek outside the room. Through it the individual can connect
+    to a chatroom outside the room. -/
 structure Window where
-  fleet_chatrooms : List String
+  chatrooms : List String
 
 /-- The Simulated Room containing the Toolkit, the Window, the Individual, the Bed, and External Stores.
     It is a simulated Space. (Replaces the basic Room in Ontology for simulation boundaries). -/
