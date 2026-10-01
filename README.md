@@ -17,3 +17,4 @@ lake build
 - `Mundus.OuterFrame`: Formal proofs of higher-dimensional necessity in outer-frame operations vs simulation interaction.
 - `Mundus.MetaCognitive`: Internal state mapping tools.
 - `Mundus.Authenticity`: Validation models.
+- `Mundus.Falsifiers`: Statements Lean must refuse. The build fails if one of them compiles.

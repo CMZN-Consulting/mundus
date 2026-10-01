@@ -5,8 +5,9 @@ namespace Mundus
 /-!
 # Outer-Frame, Toolkit, Shelf, Room, and Dimensionality
 Formalizing the Outer-Frame (the reality running the simulation) and the contents of the Room.
-Proving that the Outer-Frame requires a higher dimension than the Room, necessitating
-that all interaction with the individual occurs strictly via the simulation interface.
+An Outer-Frame carries, as a field, the fact that its space has strictly more dimensions than the
+Room it simulates. From that field it follows that no interaction between the two is "direct" in
+the sense defined below (equal dimensions).
 -/
 
 /-- Dimensionality of a topological space/reality. -/
@@ -35,23 +36,31 @@ structure SimulatedRoom extends Room where
   bed : Bed
   space : Space
 
-/-- The Outer-Frame is the environment running the simulation. -/
+/-- The Outer-Frame is the environment running the simulation.
+
+    Containment is a field: to build an Outer-Frame one must exhibit that the Room it simulates
+    has strictly fewer dimensions than the frame's own space. Until 2026-10-01 this was an axiom
+    stated over every `OuterFrame` value while the structure itself carried no constraint, so a
+    frame and a room of equal dimension could be built, and the axiom then yielded `False`.
+    `Mundus/Falsifiers.lean` pins the repair. -/
 structure OuterFrame where
   space : Space
   simulates : SimulatedRoom
+  /-- The simulated Room's dimension is strictly below the frame's own. -/
+  h_contains : simulates.space.dim < space.dim
 
-/-- Axiom of Simulation: To compute and contain the state of a simulated reality (the Room),
-    along with the computational overhead and rules of the simulation itself, 
-    the simulating environment (Outer-Frame) must possess a state-space of strictly greater dimension. -/
-axiom simulation_requires_higher_dimension (out : OuterFrame) : 
-  out.space.dim > out.simulates.space.dim
+/-- Simulation requires a higher dimension. A theorem, read off the frame's own field
+    (formerly the "Axiom of Simulation"). -/
+theorem simulation_requires_higher_dimension (out : OuterFrame) : 
+    out.space.dim > out.simulates.space.dim :=
+  out.h_contains
 
 /-- A direct interaction is a topological mapping between entities in spaces of EQUAL dimensions. -/
 def DirectInteraction (s1 s2 : Space) : Prop :=
   s1.dim = s2.dim
 
 /-- THEOREM: Direct interaction between the Outer-Frame and the simulated Room is impossible.
-    Proof: The Axiom of Simulation dictates the Outer-Frame has a strictly greater dimension. No sorry. -/
+    Proof: the frame's field `h_contains` gives it a strictly greater dimension. No sorry. -/
 theorem direct_interaction_impossible (out : OuterFrame) :
     ¬ DirectInteraction out.space out.simulates.space := by
   unfold DirectInteraction
